@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/assets/main.bundle.css?version=3hu7ppta">
-    <script defer src="/assets/main.bundle.js?version=3hu7ppta"></script>
+    <link rel="stylesheet" href="/assets/main.bundle.css?version=krjuxous">
+    <script defer src="/assets/main.bundle.js?version=krjuxous"></script>
     <title>Repuéblame. Pueblos con calidad de vida.</title>
     <meta name="description" content="Pueblos con calidad de vida. Descubre el lugar ideal donde vivir o teletrabajar.">
     
@@ -122,7 +122,8 @@
         </label>
 
         <label class="inline-flex items-center">
-          <input id="filter-ubicacion-1" type="checkbox" class="rounded bg-indigo-200 border-transparent focus:border-transparent focus:bg-indigo-200 text-indigo-700 focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+          <input id="filter-capital" type="checkbox" class="rounded bg-indigo-200 border-transparent focus:border-transparent focus:bg-indigo-200 text-indigo-700 focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500"
+                 onchange="refresh()">
           <span class="ml-2 whitespace-nowrap">Cerca de una capital</span>
         </label>
 
@@ -90165,6 +90166,7 @@
       var hidden = false;
       var cod_ine = place.cod;
       var filterProvincia = document.getElementById('filter-provincia').value;
+      var filterCapital = document.getElementById('filter-capital').value;
       var filterPopulationRange = document.getElementById('filter-population').value.split('-');
       var filterViviendas = document.getElementById('filter-viviendas').checked;
       var filterPriceRange = document.getElementById('filter-price').value.split('-');
@@ -90230,6 +90232,11 @@
         }
         if (!hidden && filterEncanto) {
           if (place.mon === 0) {
+            hidden = true;
+          }
+        }
+        if (!hidden && filterCapital) {
+          if (place.d_cap > 35) {
             hidden = true;
           }
         }
