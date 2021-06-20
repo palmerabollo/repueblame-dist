@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/assets/main.bundle.css?version=vp8m0xzd">
-    <script defer src="/assets/main.bundle.js?version=vp8m0xzd"></script>
+    <link rel="stylesheet" href="/assets/main.bundle.css?version=g9hqjc38">
+    <script defer src="/assets/main.bundle.js?version=g9hqjc38"></script>
     <title>Repuéblame. VILLARES DE LA REINA en SALAMANCA</title>
     <meta name="description" content="Pueblos con calidad de vida. Descubre el lugar ideal donde vivir o teletrabajar.">
     
@@ -79,8 +79,9 @@
         <li class="hidden md:inline">
           <div class="pr-4 md:pr-8 md:pl-8">
             <div class="search-input">
-              <a href="#" hidden></a>
-              <input role="search" title="Busca entre los 2248 pueblos" type="search" placeholder="Busca entre los 2248 pueblos..." class="form-input w-64 xl:w-96">
+              <label class="hidden" for="search">Busca entre los 2248 pueblos</label>
+              <a href="#" class="hidden" hidden aria-hidden="true">enlace dinámico</a>
+              <input id="search" role="search" title="Nombre del pueblo que quieres buscar" type="search" placeholder="Busca entre los 2248 pueblos..." class="form-input w-64 xl:w-96">
               <div class="autocom-box">
               </div>
             </div>
@@ -89,7 +90,7 @@
         </li>
         
           <li class="ml-8 text-lg">
-            <a class="whitespace-nowrap border-b-2 border-white" href="/">
+            <a class="whitespace-nowrap border-b-2 border-white" href="/#filters">
               Buscador</a>
           </li>
         
@@ -243,11 +244,11 @@ function showSuggestions(list) {
 
             El 28% de los habitantes están en paro,
             
-              un valor alto.
+              un valor elevado.
             
 
             
-              Su cercanía a la capital (Salamanca) facilita desplazarse diariamente.
+              Su proximidad a la capital (Salamanca) facilita desplazarse diariamente.
             
           </div>
 
@@ -270,7 +271,7 @@ function showSuggestions(list) {
             
 
             
-              No hay hospitales. El hospital más próximo
+              No hay hospitales. El hospital más cercano
               
                 está muy muy cerca, en SALAMANCA, a tan sólo 4.8km de el municipio.
               
@@ -282,7 +283,7 @@ function showSuggestions(list) {
             
 
             
-              y cuenta con únicamente un consultorio.
+              y dispone de únicamente un consultorio.
             
           </div>
 
@@ -301,7 +302,7 @@ function showSuggestions(list) {
 
           <div class="mb-6 text-gray-800">
             
-              El municipio tiene centros educativos,
+              El municipio tiene colegios,
               
             
 
@@ -366,7 +367,7 @@ function showSuggestions(list) {
             
 
             
-              Su cercanía a municipios más grandes como la capital (Salamanca) amplía notablemente la oferta de ocio y cultura.
+              Su proximidad a municipios más grandes como la capital (Salamanca) amplía notablemente la oferta de ocio y cultura.
             
           </div>
 
@@ -440,7 +441,7 @@ function showSuggestions(list) {
           MONTERRUBIO DE ARMUÑA
         </div>
         <div class="h-36">
-          <img alt="Imagen de 1326" class="w-full h-full object-cover" src="/photos/37202-240w.jpeg" loading="lazy">
+          <img alt="Imagen de MONTERRUBIO DE ARMUÑA" class="w-full h-full object-cover" src="/photos/37202-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -471,7 +472,7 @@ function showSuggestions(list) {
           SAN CRISTÓBAL DE LA CUESTA
         </div>
         <div class="h-36">
-          <img alt="Imagen de 1031" class="w-full h-full object-cover" src="/photos/37278-240w.jpeg" loading="lazy">
+          <img alt="Imagen de SAN CRISTÓBAL DE LA CUESTA" class="w-full h-full object-cover" src="/photos/37278-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -502,7 +503,7 @@ function showSuggestions(list) {
           SALAMANCA
         </div>
         <div class="h-36">
-          <img alt="Imagen de 144825" class="w-full h-full object-cover" src="/photos/37274-240w.jpeg" loading="lazy">
+          <img alt="Imagen de SALAMANCA" class="w-full h-full object-cover" src="/photos/37274-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -533,7 +534,7 @@ function showSuggestions(list) {
           VILLAMAYOR
         </div>
         <div class="h-36">
-          <img alt="Imagen de 7212" class="w-full h-full object-cover" src="/photos/37354-240w.jpeg" loading="lazy">
+          <img alt="Imagen de VILLAMAYOR" class="w-full h-full object-cover" src="/photos/37354-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -583,7 +584,7 @@ function showSuggestions(list) {
           VILLAMAYOR
         </div>
         <div class="h-36">
-          <img alt="Imagen de 7212" class="w-full h-full object-cover" src="/photos/37354-240w.jpeg" loading="lazy">
+          <img alt="Imagen de VILLAMAYOR" class="w-full h-full object-cover" src="/photos/37354-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -614,7 +615,7 @@ function showSuggestions(list) {
           CARBAJOSA DE LA SAGRADA
         </div>
         <div class="h-36">
-          <img alt="Imagen de 7251" class="w-full h-full object-cover" src="/photos/37085-240w.jpeg" loading="lazy">
+          <img alt="Imagen de CARBAJOSA DE LA SAGRADA" class="w-full h-full object-cover" src="/photos/37085-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -645,7 +646,7 @@ function showSuggestions(list) {
           FUENSALDAÑA
         </div>
         <div class="h-36">
-          <img alt="Imagen de 1954" class="w-full h-full object-cover" src="/photos/47066-240w.jpeg" loading="lazy">
+          <img alt="Imagen de FUENSALDAÑA" class="w-full h-full object-cover" src="/photos/47066-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -676,7 +677,7 @@ function showSuggestions(list) {
           CABRERIZOS
         </div>
         <div class="h-36">
-          <img alt="Imagen de 4254" class="w-full h-full object-cover" src="/photos/37067-240w.jpeg" loading="lazy">
+          <img alt="Imagen de CABRERIZOS" class="w-full h-full object-cover" src="/photos/37067-240w.jpeg" loading="lazy">
         </div>
       </div>
       <div class="flex flex-nowrap bg-yellow-100 justify-between p-2 text-sm text-gray-600">
@@ -725,7 +726,7 @@ function showSuggestions(list) {
       <span class="ml-3 text-xl">Repuéblame</span>
     </a>
 
-    <p class="hidden md:block flew-grow text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+    <p class="hidden md:block flew-grow text-sm text-gray-600 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
       Pueblos en
       
       <a href="/pueblos/castilla-y-leon/avila">Ávila ·</a>
@@ -748,7 +749,7 @@ function showSuggestions(list) {
       
     </p>
 
-    <p class="flex-grow text-right text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+    <p class="flex-grow text-right text-sm text-gray-600 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
       © 2021 García Bernardo<br/>
       <a href="https://twitter.com/palmerabollo" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@palmerabollo</a>
       <a href="https://twitter.com/javiergb_com" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@javiergb_com</a>
