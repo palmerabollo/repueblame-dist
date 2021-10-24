@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/assets/main.bundle.css?version=v73qmnav">
-    <script defer src="/assets/main.bundle.js?version=v73qmnav"></script>
+    <link rel="stylesheet" href="/assets/main.bundle.css?version=lk4d1wai">
+    <script defer src="/assets/main.bundle.js?version=lk4d1wai"></script>
     <title>Repuéblame. Indicadores de ABADES en Segovia</title>
     <meta name="description" content="Pueblos con calidad de vida. Descubre el lugar ideal donde vivir o teletrabajar.">
     
@@ -190,13 +190,7 @@ function showSuggestions(list) {
         <div class="mt-6">
           <div class="mb-6 text-gray-800">
             El índice global de calidad de vida (i_ca) se calcula como la puntuación del <a href="#se" class="underline">indicador de servicios</a> sumado al indicador de ocio.
-            Se suma un último componente que valora la tranquilidad del sitio, caclulado como la raíz cuadrada (sqrt) de la poblacion dividido entre 4.
-            Los resultados de los municipios se normalizan.
-            
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_ca"] = -np.sqrt(df["pob"]) / 2 + df["i_se"] * 2 + df["i_oc"] * 2<br/>
-df["i_ca"] = normalize(df["i_ca"])<br/>
-</pre>
+            Se suma un último componente que valora la tranquilidad del sitio, que actualmente tiene en cuenta la población del municipio.
           </div>
 
           
@@ -215,17 +209,9 @@ df["i_ca"] = normalize(df["i_ca"])<br/>
 
 
           <div class="mb-6 text-gray-800" id="co">
-            Se calcula como la raiz cuadrada de las antenas de telefonía disponibles.
-            La raíz cuadrada tiene en cuenta la relación entre el número de antenas y área (a mayor población, la distancia hasta una antena baja con la raíz cuadrada).
-            En las poblaciones pequeñas (con menos de 25 antenas), se resta puntos segun la distancia a la capital, con 1 punto cada 100km, ya que los municipios más cercanos a las capitales tienen mejor
-            cobertura y mayor potencial para el despliegue de nuevas redes.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_co"] = normalize_radio(df, "n_ant")<br/>
-c = df["n_ant"] < 25<br/>
-df.loc[c, "i_co"] -= df.loc[c, "d_cap"] / 100<br/>
-df["i_co"] = normalize(df["i_co"])<br/>
-</pre>
+            Tiene en cuenta el número de antenas de telefonía disponibles.
+            En las poblaciones pequeñas (con menos de 25 antenas), se restan puntos segun la distancia a la capital, con 1 punto cada 100km,
+            ya que los municipios más cercanos a las capitales tienen mejor cobertura y mayor potencial para el despliegue de nuevas redes.
           </div>
 
           
@@ -244,14 +230,8 @@ df["i_co"] = normalize(df["i_co"])<br/>
 
 
           <div class="mb-6 text-gray-800" id="ec">
-            Se calcula como sqrt(población), en el que la raíz cuadrada tiene en cuenta la relación entre población y área (a mayor población,
-            la distancia para viajar al puesto de trabajo aumenta con la raíz cuadrada), y restando el nivel de paro.
-            Ambos componentes son normalizados dividiendo por el máximo.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_ec"] = normalize_radio(df, "pob") - df["par"] / df["par"].max()<br/>
-df["i_ec"] = normalize(df["i_ec"])<br/>
-</pre>
+            Tiene en cuenta el número de parados (sobre la población total) y la población del municipio.
+            Puede ser impreciso, especialmente en municipios con población envejecida.
           </div>
 
           
@@ -270,16 +250,8 @@ df["i_ec"] = normalize(df["i_ec"])<br/>
 
 
           <div class="mb-6 text-gray-800" id="sa">
-            Se calcula sumando sqrt(farmacias) y sqrt(consultorios), que se valoran positivamente, y restando la distancia al hospital más cercano.
-            La raíz cuadrada tiene en cuenta la distancia a viajar a farmacias/consultorios.
-            Los tres componentes son normalizados dividiendo por el máximo.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_sa"] = normalize_radio(df, "far") +<br/>
-            (1 - df["d_hos"] / df["d_hos"].max()) +<br/>
-            normalize_radio(df, "con")<br/>
-df["i_sa"] = normalize(df["i_sa"])<br/>
-</pre>
+            Se tiene en cuenta el número de farmacias y consultorios, que se valoran positivamente.
+            Se penaliza con la distancia al hospital más cercano.
           </div>
 
           
@@ -298,20 +270,9 @@ df["i_sa"] = normalize(df["i_sa"])<br/>
 
 
           <div class="mb-6 text-gray-800" id="se">
-            Se calcula como sqrt(farmacias) + sqrt(consultorios) - distancia al hospital más cercano + sqrt(colegios) + sqrt(restaurantes) + sqrt(bares). Los cinco componentes son normalizados dividiendo por el máximo.
+            Los servicios tienen en cuenta el resultado del indicador de sanidad y salud.
+            Además se tienen en cuenta los colegios, restaurantes y bares.
             En las poblaciones con menos de 10 bares, 5 restaurantes o 2 farmacias, se penaliza la distancia a la capital, restando un punto por cada 10 km.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_se"] = normalize_radio(df, "far") +<br/>
-             (1-df["d_hos"]/df["d_hos"].max()) +<br/>
-             normalize_radio(df, "con") +<br/>
-             normalize_radio(df, "col") +<br/>
-             normalize_radio(df, "res") +<br/>
-             normalize_radio(df, "bar")<br/>
-c = (df["bar"] < 10) | (df["res"] < 5) | (df["far"] < 2)<br/>
-df.loc[c, "i_se"] -= df.loc[c,"d_cap"] / 10<br/>
-df["i_se"] = normalize(df["i_se"])<br/>
-</pre>
           </div>
 
           
@@ -330,21 +291,9 @@ df["i_se"] = normalize(df["i_se"])<br/>
 
 
           <div class="mb-6 text-gray-800" id="oc">
-            Se calcula como sqrt(restaurantes) + sqrt(bares) + sqrt(monumentos) + restaurantes/población. Los componentes son normalizados dividiendo por el máximo.
+            Se calcula con el número de restaurantes, bares, monumentos y la cantidad de restaurantes por habitante.
             En las poblaciones con menos de 10 bares, 5 restaurantes o 2 monumentos, se penaliza la distancia a la capital, restando un punto por cada 10 km.
-            Las poblaciones sin monumentos, bares ni restaurantes se penalizan con 10 puntos.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_oc"] = normalize_radio(df, "res") +<br/>
-             normalize_radio(df, "bar") +<br/>
-             normalize_radio(df, "mon") +<br/>
-             normalize_pob(df, "res")<br/>
-c = (df["bar"] < 10) | (df["res"] < 5) | (df["mon"] < 2)<br/>
-df.loc[c,"i_oc"] -= df.loc[c, "d_cap"] / 10<br/>
-c = (df["bar"]==0) | (df["res"]==0) | (df["mon"]==0)<br/>
-df.loc[c, "i_oc"] -= 10<br/>
-df["i_oc"] = normalize(df["i_oc"] )<br/>
-</pre>
+            Las poblaciones sin monumentos, bares ni restaurantes registrados se penalizan con 10 puntos.
           </div>
 
           
@@ -363,14 +312,8 @@ df["i_oc"] = normalize(df["i_oc"] )<br/>
 
 
           <div class="mb-6 text-gray-800" id="vi">
-            Se calcula como (1+viviendas/poblacion) * log(viviendas) * 1/(precio por m2). Se evalúa positivamente tanto tener gran cantidad de viviendas per capita,
-            como la oferta total de vivienda (usando el logaritmo para que la contribución decaiga exponencialmente con el numero total de viviendas), y el precio por metro cuadrado.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-df["i_vi"] = ((1 + normalize_pob(df, "n_viv")) * np.log10(1 + df["n_viv"])) / 
-             ((100 + df["m2"]) / (100 + df["m2"].max()))<br/>
-df["i_vi"] = normalize(df["i_vi"].fillna(0))<br/>
-</pre>
+            Se evalúa positivamente tanto tener gran cantidad de viviendas per capita,
+            como la oferta total de vivienda y el precio por metro cuadrado.
           </div>
         </div>
       </div>
@@ -407,13 +350,6 @@ df["i_vi"] = normalize(df["i_vi"].fillna(0))<br/>
 
   <div id="grid-places" class="container px-5 mx-auto max-w-7xl">
     Se calculan los pueblos más cercanos en línea recta.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-X = np.array([_ for _ in df["position"]])<br/>
-nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(X)<br/>
-distances, indices = nbrs.kneighbors(X)<br/>
-df["ne"] = [[df.loc[i, "cod"] for i in index[1:]] for index in indices]<br/>
-</pre>
   </div>
 </section>
 
@@ -430,15 +366,8 @@ df["ne"] = [[df.loc[i, "cod"] for i in index[1:]] for index in indices]<br/>
   </div>
 
   <div id="grid-places" class="container px-5 mx-auto max-w-7xl">
-    Implementa un algoritmo de aprendizaje no supervisado <a href="https://scikit-learn.org/stable/modules/neighbors.html#unsupervised-nearest-neighbors"> de búsqueda de <i>nearest neighbors</i></a>
-    utilizando el algoritmo <a href="https://en.wikipedia.org/wiki/Ball_tree">ball tree</a> para organizar los municipios con indicadores similares.
-
-<pre class="font-mono text-xs mt-10 text-gray-500 leading-none">
-X = df[["i_ca", "i_vi", "i_oc", "i_se", "i_sa", "i_ec", "i_co"]].fillna(0).values<br/>
-nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(X)<br/>
-distances, indices = nbrs.kneighbors(X)<br/>
-df["similar"] = [[df.loc[i, "cod"] for i in index[1:]] for index in indices]<br/>
-</pre>
+    Implementa un algoritmo de aprendizaje no supervisado <a class="underline" href="https://scikit-learn.org/stable/modules/neighbors.html#unsupervised-nearest-neighbors"> de búsqueda de <i>nearest neighbors</i></a>
+    utilizando el algoritmo <a class="underline" href="https://en.wikipedia.org/wiki/Ball_tree">ball tree</a> para organizar los municipios con indicadores similares.
   </div>
 </section>
 
